@@ -8,6 +8,6 @@
 <h1>jpa</h1>
 
 <a href="book/list">book/list</a> <br />
-
+<a href="api/category/2/books">api/category/2/books</a><br />
 </body>
 </html>
