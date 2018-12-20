@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import net.skhu.domain.Book;
 import net.skhu.domain.Category;
@@ -22,6 +23,21 @@ public class BookService {
 		return bookRepository.findAll();
 	}
 	
+	public boolean hasErrors(BookModel book, BindingResult bindingResult) {
+		
+		Book bookc = bookRepository.findByTitle(book.getTitle());
+	        if (bookc != null) {
+	            bindingResult.rejectValue("title", null, "책제목이 중복됩니다.");
+	            return true;
+	        }
+	        
+		if (bindingResult.hasErrors())
+            return true;
+        
+       
+        return false;
+    }
+
 	public Book createEntity(BookModel bookModel) {
 		Book book = new Book();
 		book.setTitle(bookModel.getTitle());

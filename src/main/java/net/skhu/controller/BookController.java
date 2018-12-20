@@ -47,7 +47,7 @@ public class BookController {
 	@RequestMapping(value="create", method=RequestMethod.POST)
 	public String create(@Valid BookModel book, BindingResult bindingResult,
 		Model model	) {
-		if(bindingResult.hasErrors()) {
+		if(bookService.hasErrors(book, bindingResult)) {
 			model.addAttribute("categories", categoryRepository.findAll());
 			model.addAttribute("publishers", publisherRepository.findAll());
 			return "book/create";
