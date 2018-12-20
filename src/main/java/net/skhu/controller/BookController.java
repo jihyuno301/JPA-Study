@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 
 import net.skhu.domain.Book;
 import net.skhu.model.BookModel;
+import net.skhu.model.Pagination;
 import net.skhu.repository.BookRepository;
 import net.skhu.repository.CategoryRepository;
 import net.skhu.repository.PublisherRepository;
@@ -30,8 +31,9 @@ public class BookController {
 	@Autowired PublisherRepository publisherRepository;
 	
 	@RequestMapping(value="list", method=RequestMethod.GET)
-	public String list(Model model) {
-		model.addAttribute("books", bookRepository.findAll());
+	public String list(Pagination pagination, Model model) {
+		List<Book> books = bookRepository.findAll(pagination);
+		model.addAttribute("books", books);
 		
 		return "book/list";
 	}
