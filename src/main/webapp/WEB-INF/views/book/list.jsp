@@ -18,7 +18,20 @@
   <div class="pull-right mb5">
   	<a href="create" class="btn btn-info">
     <span class="glyphicon glyphicon-user"></span>책 등록</a>
-  </div>    
+  </div>
+  <br>
+  <br>
+  <div class="pull-right mb5">
+  	<form action="countByTitleContaining">
+  		<input type="text" name="name" value="${name}">
+  		<button type="submit">title containing 검색</button>
+  	</form> 
+  	
+  </div>
+  <br><br>
+  <div class="pull-right mb5">
+  	${num}개
+  </div> 
   <table class="table table-bordered mt5">
     <thead>
       <tr>

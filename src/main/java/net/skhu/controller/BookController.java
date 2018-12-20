@@ -1,5 +1,7 @@
 package net.skhu.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
@@ -57,6 +59,25 @@ public class BookController {
 		return "redirect:list";
 	}
 	
+	//JPA query creation
+	@RequestMapping(value="findAllByOrderByTitleDesc")
+	public String findAllByOrderByTitleDesc(Model model) {
+		model.addAttribute("books", bookRepository.findAllByOrderByTitleDesc());
+		return "book/list";
+	}
 	
+	@RequestMapping(value="findByCategoryNameNot")
+	public String findByCategoryNameNot(Model model, @RequestParam("name") String name) {
+		model.addAttribute("books", bookRepository.findByCategoryNameNot(name));
+		return "book/list";
+	}
+	
+	@RequestMapping(value="countByTitleContaining")
+	public String countByTitleContaining(Model model, @RequestParam("name") String name) {
+		model.addAttribute("num", bookRepository.countByTitleContaining(name));
+		model.addAttribute("books", bookRepository.findByTitleContaining(name));
+		model.addAttribute("name", name);
+		return "book/list";
+	}
 	
 }
